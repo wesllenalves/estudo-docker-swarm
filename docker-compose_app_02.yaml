@@ -1,0 +1,11 @@
+version: "3.8"
+
+services:
+  kuma:
+    image: louislam/uptime-kuma
+    deploy:
+      replicas: 5
+      placement:
+        constraints: [node.role==worker]
+    ports:
+      - "3001:3001"
