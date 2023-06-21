@@ -3,7 +3,10 @@
 comandos:
 
 comando para criar o cluster swarm:
-    docker swarm init --advertise-addr (pega o comando exibido para criar os works)
+    docker swarm init --advertise-addr [ip da maquina] (pega o comando exibido para criar os works)
+
+comandos para vizualizar os nodes:
+    docker node list
 
 comando para promover um node para manager ou eleger um de backup:
     docker node promote [nome do node]
@@ -23,3 +26,4 @@ Descobrir o token de gerencia do cluster:
 
 docker service update --force site_site
 
+docker swarm join --token SWMTKN-1-0qor4emmptfiktes075qlfktksa2ubf324kgddirvh2sa9dq2y-25rilcpk8ytlrlgxtdncnqi0d 192.168.121.243:2377

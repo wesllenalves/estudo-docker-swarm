@@ -13,4 +13,3 @@ while IFS= read -r status; do
         echo
     fi
 done <<< "$statuses"
-

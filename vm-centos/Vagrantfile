@@ -1,17 +1,13 @@
 Vagrant.configure("2") do |config|
-  (1..2).each do |i|
-    config.vm.define "web_#{i}" do |web|
-      web.vm.box = "centos/7"
-      web.vm.network "public_network", bridge: "Realtek Gaming GbE Family Controller", ip: "192.168.1.12#{i}"
-      web.vm.provision "shell", path: "httpsd_#{i}.sh"
-    end
-  end
-
-  (1..2).each do |i|
-    config.vm.define "lb_ipvsadm#{i}" do |lb_ipvsadm|
-      lb_ipvsadm.vm.box = "centos/7"
-      lb_ipvsadm.vm.network "public_network", bridge: "Realtek Gaming GbE Family Controller", ip: "192.168.1.12#{i+2}"
-      lb_ipvsadm.vm.provision "shell", path: "lb_ipvsadm.sh"
+  (1..5).each do |i|
+    config.vm.define "maquina_#{i}" do |maquina|
+      maquina.vm.box = "centos/7"
+      maquina.vm.network "public_network", bridge: "wlan0", ip: "192.168.1.12#{i}"      
+      maquina.vm.provision "shell", inline: <<-SHELL
+        sudo hostnamectl set-hostname "node#{i}"
+        alias cls="clear"
+      SHELL
+      maquina.vm.provision "shell", path: "install_docker.sh"
     end
   end
 end
